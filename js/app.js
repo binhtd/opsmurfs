@@ -47,9 +47,11 @@
     $('#portfolio-grid').mixitup({
         'onMixStart': function (config) {
             $('div.toggleDiv').hide();
+        },
+        'onMixLoad': function (config){
+            $("#accounts .nav-pills li[data-filter='web'] a").click();
         }
     });
-
     //Initial Out clients slider in client section
     $('#clint-slider').bxSlider({
         pager: false,

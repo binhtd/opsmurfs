@@ -1,6 +1,7 @@
-CREATE DATABASE opsmurfs;
+CREATE DATABASE IF NOT EXISTS opsmurfs;
 
-USE opsmurfs
+USE opsmurfs;
+
 CREATE TABLE account(
 id int(10) NOT NULL AUTO_INCREMENT,
 username varchar(255) NOT NULL,

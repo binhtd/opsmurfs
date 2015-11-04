@@ -12,8 +12,8 @@ $categories = array(
 
 $databaseHostName = "localhost";
 $databaseName = "opsmurfs";
-$databaseUserName = "root";
-$databasePassword = "D@ngha123456";
+$databaseUserName = "anh_binh";
+$databasePassword = "123456";
 
 $rowPerPage = 10;
 

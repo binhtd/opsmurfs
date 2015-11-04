@@ -2,7 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>opsmurfs backend</title>
+    <title>SMURFS Backend</title>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Load Roboto font -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- Load css styles -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../css/backend.css" />
 </head>
 <body>
 <?php
@@ -18,7 +26,8 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
     }
 }
 ?>
-
+<div class="container">
+    <div class="row">
 <?php if (!isset($_SESSION['login_user'])): ?>
     <form method="post" action="backend.php">
         <p>Login backend</p>
@@ -127,7 +136,7 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
     ";
     $result = mysql_query($select);
     ?>
-
+    <br/>
     <form method="post" action="backend.php">
         <table>
             <tr>
@@ -173,7 +182,8 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
                 </td>
             </tr>
         </table>
-        <table border="1">
+        <br/><br/>
+        <table border="1" style="width: 96%">
             <tr>
                 <td colspan="7">
                     Total rows: <?php echo $countRow["total"]; ?>
@@ -200,7 +210,7 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
                     ?>
                 </td>
             </tr>
-            <tr>
+            <tr class="text-center">
                 <td>account id</td>
                 <td>username</td>
                 <td>password</td>
@@ -210,12 +220,12 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
                 <td>action</td>
             </tr>
             <?php if (!$result): ?>
-                <tr>
+                <tr  class="text-center">
                     <td colspan="7">Empty data</td>
                 </tr>
             <?php else: ?>
                 <?php while ($row = mysql_fetch_assoc($result)) { ?>
-                    <tr>
+                    <tr class="text-center">
                         <td><?php echo $row["id"] ?></td>
                         <td><?php echo $row["username"] ?></td>
                         <td><?php echo $row["password"] ?></td>
@@ -247,5 +257,9 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
     </form>
     <?php mysql_close($connection); ?>
 <?php endif; ?>
+    </div>
+</div>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/modernizr.custom.js"></script>
 </body>
 </html>

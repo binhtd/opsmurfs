@@ -39,6 +39,11 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
 <?php else: ?>
 
     <?php
+    if (isset($_REQUEST["action"]) && ($_REQUEST["action"]=="logout")){
+        unset($_SESSION['login_user']);
+        header("Location:backend.php");
+    }
+
     $connection = mysql_connect("$databaseHostName", "$databaseUserName", "$databasePassword");
     $db = mysql_select_db("$databaseName", $connection);
 
@@ -62,16 +67,16 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
         if (!empty($username) && !empty($categoryid) && ($_POST['submit'] == "Insert Account")) {
             $sqlInsert = "INSERT INTO account(username, password, categoryid, inserted_date) VALUES ('$username', '$password', $categoryid, '$insertedDate')";
             mysql_query($sqlInsert, $connection);
+            mysql_close($connection);
+            header("Location:backend.php");
         }
 
         if (!empty($username) && !empty($categoryid) && ($_POST['submit'] == "Edit Account")) {
             $accountId = (int)$_REQUEST["accountid"];
             $sqlUpdate = "UPDATE account set username='$username', password = '$password', categoryid=$categoryid where id=$accountId";
             mysql_query($sqlUpdate, $connection);
-            unset($username);
-            unset($password);
-            unset($categoryid);
-            unset($accountId);
+            mysql_close($connection);
+            header("Location:backend.php");
         }
     }
 
@@ -80,6 +85,8 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
         $accountId = (int)$_REQUEST["accountid"];
         $sqlDelete = "delete from account where id=$accountId";
         mysql_query($sqlDelete, $connection);
+        mysql_close($connection);
+        header("Location:backend.php");
     }
 
     //edit data
@@ -119,11 +126,13 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
                LIMIT $offset, $rowPerPage
     ";
     $result = mysql_query($select);
-
     ?>
 
     <form method="post" action="backend.php">
         <table>
+            <tr>
+                <td colspan="2">Hello <?php echo  $_SESSION['login_user'];?> <a href="backend.php?action=logout">Logout</a></td>
+            </tr>
             <tr>
                 <td><label>Username :</label></td>
                 <td><input id="name" value="<?php echo isset($username) ? $username : "" ?>" name="username"

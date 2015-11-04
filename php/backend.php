@@ -259,6 +259,8 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Login")) {
 <?php endif; ?>
     </div>
 </div>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.mixitup.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/modernizr.custom.js"></script>
 </body>
